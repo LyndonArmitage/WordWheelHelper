@@ -14,8 +14,10 @@ import java.util.Scanner;
  */
 public class Main {
 
-	public char mustHave = 'a';
-	public String canHave = "cte";
+	public char mustHave = 'i';
+	public String canHave = "enrdigna";
+	// This example should find the word ingrained
+	// It doesn't at the moment but finds the rest of the words
 	public ArrayList<String> words = new ArrayList<String>();
 
 	public static void main(String args[]) {
