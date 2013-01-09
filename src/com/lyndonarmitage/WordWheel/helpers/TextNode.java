@@ -26,6 +26,7 @@ public class TextNode {
 		addedCharacter = character;
 		textString = parent.getTextString() + character;
 		textString = reorderString(textString);
+		System.out.println("New node: " + addedCharacter + " = " + textString);
 	}
 
 	public void makeRootNode(char mustHave, String canHave, HashMap<Character, Integer> charMap) {
@@ -34,15 +35,46 @@ public class TextNode {
 		generateChildren(canHave, charMap);
 	}
 
-	//TODO: recode this to use the charMap
+	//static int DD = 0;
 	private void generateChildren(String canHave, HashMap<Character, Integer> charMap) {
 		for (int i = 0; i < canHave.length(); i++) {
 			// only make children with characters we haven't used yet
-			if (canHave.charAt(i) == addedCharacter || textString.contains(String.valueOf(canHave.charAt(i)))) continue;
+			boolean characterPresent = charCount(canHave.charAt(i)) >= charMap.get(canHave.charAt(i));
+
+//			if (canHave.charAt(i) == addedCharacter || textString.contains(String.valueOf(canHave.charAt(i)))) continue;
+			if (characterPresent) continue;
 			TextNode node = new TextNode(canHave.charAt(i), this);
-			children.add(node);
-			node.generateChildren(canHave, charMap);
+			if (addChild(node)) {
+				//System.out.println(++DD);
+				node.generateChildren(canHave, charMap);
+			}
 		}
+	}
+
+	private boolean addChild(TextNode N) {
+		boolean addIt = true;
+		for (TextNode T : children) {
+			if (T.getTextString().equals(N.getTextString())) {
+				addIt = false;
+				break;
+			}
+		}
+		if (addIt) {
+			children.add(N);
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	private int charCount(char c) {
+		int count = 0;
+		for (char C : textString.toCharArray()) {
+			if (C == c) {
+				count++;
+			}
+		}
+		return count;
 	}
 
 	/**

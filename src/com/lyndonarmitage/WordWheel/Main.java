@@ -15,8 +15,6 @@ public class Main {
 	public char mustHave = 'i';
 	public String canHave = "enrdigna";
 	// This example should find the word ingrained
-	// It doesn't at the moment but finds the rest of the words
-	// this is because of how TextNode is coded. At the moment it will ignore duplicated letters I think
 	public ArrayList<String> words = new ArrayList<String>();
 
 	public static void main(String args[]) {
