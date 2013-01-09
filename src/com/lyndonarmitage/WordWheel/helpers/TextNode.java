@@ -11,7 +11,7 @@ public class TextNode {
 	private char addedCharacter = '\0';
 	private String textString = "";
 	private TextNode parent = null;
-	private ArrayList<TextNode> children = new ArrayList<TextNode>();
+	public ArrayList<TextNode> children = new ArrayList<TextNode>();
 
 	public TextNode() {
 	}
@@ -29,11 +29,29 @@ public class TextNode {
 	public void makeRootNode(char mustHave, String canHave) {
 		this.addedCharacter = mustHave;
 		this.textString = String.valueOf(mustHave);
-		generateChildren();
+		generateChildren(canHave);
 	}
 
-	private void generateChildren() {
+	private void generateChildren(String canHave) {
+		for (int i = 0; i < canHave.length(); i++) {
+			// only make children with characters we haven't used yet
+			if (canHave.charAt(i) == addedCharacter || textString.contains(String.valueOf(canHave.charAt(i)))) continue;
+			TextNode node = new TextNode(canHave.charAt(i), this);
+			children.add(node);
+		}
+	}
 
+	public void printChildren() {
+		for (TextNode N : children) {
+			System.out.println(N.getTextString());
+		}
+	}
+
+	public void printTree() {
+		for (TextNode N : children) {
+			System.out.println(N.getTextString());
+			N.printTree();
+		}
 	}
 
 	public char getAddedCharacter() {

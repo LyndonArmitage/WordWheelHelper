@@ -12,12 +12,15 @@ public class Main {
 	public String canHave = "ct";
 
 	public static void main(String args[]) {
-		System.out.println("Hello World");
+		Main M = new Main();
+		TextNode root = M.constructTextComboTree();
+		root.printTree();
 
 	}
 
 	public TextNode constructTextComboTree() {
 		TextNode root = new TextNode();
+		root.makeRootNode(mustHave, canHave);
 		return root;
 	}
 }
