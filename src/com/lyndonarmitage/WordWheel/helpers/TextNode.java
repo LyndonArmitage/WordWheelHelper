@@ -24,7 +24,7 @@ public class TextNode {
 		this.parent = parent;
 		addedCharacter = character;
 		textString = parent.getTextString() + character;
-		reorderString();
+		textString = reorderString(textString);
 	}
 
 	public void makeRootNode(char mustHave, String canHave) {
@@ -46,10 +46,10 @@ public class TextNode {
 	/**
 	 * Orders the string
 	 */
-	private void reorderString() {
-		char content[] = textString.toCharArray();
+	public static String reorderString(String S) {
+		char content[] = S.toCharArray();
 		java.util.Arrays.sort(content);
-		textString = String.valueOf(content);
+		return String.valueOf(content);
 	}
 
 	public void printChildren() {
