@@ -46,7 +46,7 @@ public class TextNodeCreator {
 			while (in.hasNext()) {
 				String S = in.next();
 				if (S.length() > maxLength || S.indexOf(mustHave) == -1) continue;
-				//System.out.println(S);
+				System.out.println(S);
 				words.add(S);
 			}
 			in.close();

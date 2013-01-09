@@ -7,14 +7,18 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 
 /**
+ * WordWheel Solver
+ * <p/>
  * Created By: Lyndon Armitage
  * Date: 09/01/13
+ * <p/>
+ * Currently it is very slow and needs to be optimised.
  */
 public class Main {
 
 	public char mustHave = 'i';
 	public String canHave = "enrdigna";
-	// This example should find the word ingrained
+	// This example should find the word ingrained as the biggest word
 	public ArrayList<String> words = new ArrayList<String>();
 
 	public static void main(String args[]) {

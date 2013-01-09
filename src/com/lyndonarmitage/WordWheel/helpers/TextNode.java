@@ -26,7 +26,7 @@ public class TextNode {
 		addedCharacter = character;
 		textString = parent.getTextString() + character;
 		textString = reorderString(textString);
-		System.out.println("New node: " + addedCharacter + " = " + textString);
+		//System.out.println("New node: " + addedCharacter + " = " + textString);
 	}
 
 	public void makeRootNode(char mustHave, String canHave, HashMap<Character, Integer> charMap) {
