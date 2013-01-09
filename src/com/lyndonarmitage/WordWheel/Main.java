@@ -56,6 +56,7 @@ public class Main {
 	public LinkedHashSet<String> findWords(TextNode root) {
 		LinkedHashSet<String> found = new LinkedHashSet<String>();
 		for (TextNode N : root.children) {
+			found.addAll(findWords(N));
 			for (String S : words) {
 				if (N.getTextString().length() != S.length()) continue;
 				String orderedWord = TextNode.reorderString(S);
