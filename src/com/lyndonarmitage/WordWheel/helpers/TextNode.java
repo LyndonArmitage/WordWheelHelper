@@ -17,8 +17,8 @@ public class TextNode {
 	public TextNode() {
 	}
 
-	public TextNode(char mustHave, String canHave) {
-		makeRootNode(mustHave, canHave);
+	public TextNode(char mustHave, String canHave, HashMap<Character, Integer> charMap) {
+		makeRootNode(mustHave, canHave, charMap);
 	}
 
 	public TextNode(char character, TextNode parent) {
@@ -28,42 +28,20 @@ public class TextNode {
 		textString = reorderString(textString);
 	}
 
-	public void makeRootNode(char mustHave, String canHave) {
+	public void makeRootNode(char mustHave, String canHave, HashMap<Character, Integer> charMap) {
 		this.addedCharacter = mustHave;
 		this.textString = String.valueOf(mustHave);
-		generateChildren(canHave);
+		generateChildren(canHave, charMap);
 	}
 
-	private void generateChildren(String canHave) {
+	//TODO: recode this to use the charMap
+	private void generateChildren(String canHave, HashMap<Character, Integer> charMap) {
 		for (int i = 0; i < canHave.length(); i++) {
 			// only make children with characters we haven't used yet
 			if (canHave.charAt(i) == addedCharacter || textString.contains(String.valueOf(canHave.charAt(i)))) continue;
 			TextNode node = new TextNode(canHave.charAt(i), this);
 			children.add(node);
-			node.generateChildren(canHave);
-		}
-	}
-
-	/**
-	 * Working on function that will count the amount of each character we should have
-	 *
-	 * @param mustHave
-	 * @param canHave
-	 */
-	public static void makeMap(char mustHave, String canHave) {
-//		boolean hasAllOfThatChar = false;
-		HashMap<Character, Integer> map = new HashMap<Character, Integer>(); // should make this a static variable?
-		map.put(mustHave, 1);
-		for (char C : canHave.toCharArray()) {
-			if (map.containsKey(C)) {
-				map.put(C, map.get(C) + 1);
-			} else {
-				map.put(C, 1);
-			}
-		}
-
-		for (char C : canHave.toCharArray()) {
-			System.out.println(C + "=" + map.get(C));
+			node.generateChildren(canHave, charMap);
 		}
 	}
 

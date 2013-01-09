@@ -3,6 +3,7 @@ package com.lyndonarmitage.WordWheel.helpers;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.Scanner;
 
@@ -33,7 +34,7 @@ public class TextNodeCreator {
 	public TextNode createNewNode(char mustHave, String canHave) {
 		this.mustHave = mustHave;
 		this.canHave = canHave;
-		TextNode root = new TextNode(mustHave, canHave);
+		TextNode root = new TextNode(mustHave, canHave, makeCharMap(mustHave, canHave));
 		return root;
 	}
 
@@ -68,5 +69,29 @@ public class TextNodeCreator {
 
 		}
 		return found;
+	}
+
+	/**
+	 * Gets a map of the characters for checking if they have all been used
+	 *
+	 * @param mustHave
+	 * @param canHave
+	 * @return
+	 */
+	private HashMap<Character, Integer> makeCharMap(char mustHave, String canHave) {
+		HashMap<Character, Integer> charMap = new HashMap<Character, Integer>(); // should make this a static variable?
+		charMap.put(mustHave, 1);
+		for (char C : canHave.toCharArray()) {
+			if (charMap.containsKey(C)) {
+				charMap.put(C, charMap.get(C) + 1);
+			} else {
+				charMap.put(C, 1);
+			}
+		}
+
+//		for (char C : canHave.toCharArray()) {
+//			System.out.println(C + "=" + charMap.get(C));
+//		}
+		return charMap;
 	}
 }
