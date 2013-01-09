@@ -9,7 +9,7 @@ import com.lyndonarmitage.WordWheel.helpers.TextNode;
 public class Main {
 
 	public char mustHave = 'a';
-	public String canHave = "ct";
+	public String canHave = "cte";
 
 	public static void main(String args[]) {
 		Main M = new Main();

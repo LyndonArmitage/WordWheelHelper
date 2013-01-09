@@ -24,6 +24,7 @@ public class TextNode {
 		this.parent = parent;
 		addedCharacter = character;
 		textString = parent.getTextString() + character;
+		reorderString();
 	}
 
 	public void makeRootNode(char mustHave, String canHave) {
@@ -38,7 +39,17 @@ public class TextNode {
 			if (canHave.charAt(i) == addedCharacter || textString.contains(String.valueOf(canHave.charAt(i)))) continue;
 			TextNode node = new TextNode(canHave.charAt(i), this);
 			children.add(node);
+			node.generateChildren(canHave);
 		}
+	}
+
+	/**
+	 * Orders the string
+	 */
+	private void reorderString() {
+		char content[] = textString.toCharArray();
+		java.util.Arrays.sort(content);
+		textString = String.valueOf(content);
 	}
 
 	public void printChildren() {
