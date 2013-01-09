@@ -1,12 +1,10 @@
 package com.lyndonarmitage.WordWheel;
 
 import com.lyndonarmitage.WordWheel.helpers.TextNode;
+import com.lyndonarmitage.WordWheel.helpers.TextNodeCreator;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.Scanner;
 
 /**
  * Created By: Lyndon Armitage
@@ -18,56 +16,19 @@ public class Main {
 	public String canHave = "enrdigna";
 	// This example should find the word ingrained
 	// It doesn't at the moment but finds the rest of the words
+	// this is because of how TextNode is coded. At the moment it will ignore duplicated letters I think
 	public ArrayList<String> words = new ArrayList<String>();
 
 	public static void main(String args[]) {
 		Main M = new Main();
-		TextNode root = M.constructTextComboTree();
-//		root.printTree();
-		M.loadWords("wordlist.txt", M.canHave.length() + 1);
-
-		LinkedHashSet<String> foundWords = M.findWords(root);
-		System.out.println("\nFound Words:");
+		TextNodeCreator T = TextNodeCreator.instanceOf();
+		TextNode root = T.createNewNode(M.mustHave, M.canHave);
+		T.loadWords("wordlist.txt");
+		LinkedHashSet<String> foundWords = T.findWords(root);
 		for (String S : foundWords) {
 			System.out.println(S);
 		}
+//		TextNode.makeMap(M.mustHave, M.canHave);
 	}
 
-	public TextNode constructTextComboTree() {
-		TextNode root = new TextNode();
-		root.makeRootNode(mustHave, canHave);
-		return root;
-	}
-
-	public void loadWords(String filename, int maxLength) {
-		Scanner in;
-		try {
-			in = new Scanner(new BufferedReader(new FileReader(filename)));
-			while (in.hasNext()) {
-				String S = in.next();
-				if (S.length() > maxLength || S.indexOf(mustHave) == -1) continue;
-				//System.out.println(S);
-				words.add(S);
-			}
-			in.close();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	public LinkedHashSet<String> findWords(TextNode root) {
-		LinkedHashSet<String> found = new LinkedHashSet<String>();
-		for (TextNode N : root.children) {
-			found.addAll(findWords(N));
-			for (String S : words) {
-				if (N.getTextString().length() != S.length()) continue;
-				String orderedWord = TextNode.reorderString(S);
-				if (orderedWord.equals(N.getTextString())) {
-					found.add(S);
-				}
-			}
-
-		}
-		return found;
-	}
 }

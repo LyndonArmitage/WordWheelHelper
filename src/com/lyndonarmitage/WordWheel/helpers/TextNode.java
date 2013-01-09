@@ -1,6 +1,7 @@
 package com.lyndonarmitage.WordWheel.helpers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * Created By: Lyndon Armitage
@@ -40,6 +41,29 @@ public class TextNode {
 			TextNode node = new TextNode(canHave.charAt(i), this);
 			children.add(node);
 			node.generateChildren(canHave);
+		}
+	}
+
+	/**
+	 * Working on function that will count the amount of each character we should have
+	 *
+	 * @param mustHave
+	 * @param canHave
+	 */
+	public static void makeMap(char mustHave, String canHave) {
+//		boolean hasAllOfThatChar = false;
+		HashMap<Character, Integer> map = new HashMap<Character, Integer>(); // should make this a static variable?
+		map.put(mustHave, 1);
+		for (char C : canHave.toCharArray()) {
+			if (map.containsKey(C)) {
+				map.put(C, map.get(C) + 1);
+			} else {
+				map.put(C, 1);
+			}
+		}
+
+		for (char C : canHave.toCharArray()) {
+			System.out.println(C + "=" + map.get(C));
 		}
 	}
 
