@@ -1,0 +1,8 @@
+# This is a test .gitignore file.
+# I haven't used one before but I assume they are similar to Mercurial's .hgignore files
+
+*.iml
+*.class
+*.jar
+out/
+.idea/
