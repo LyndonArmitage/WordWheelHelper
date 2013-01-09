@@ -1,1 +1,3 @@
 What this program does is attempt to solve a wordwheel puzzle similar to those you find in the newspaper.
+
+Currently it is not optimised so there are a lot of comparisons happening for each possible string.
