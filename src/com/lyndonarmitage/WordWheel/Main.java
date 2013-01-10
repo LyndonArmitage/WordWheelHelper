@@ -21,7 +21,6 @@ public class Main {
 	//	public char mustHave = 'i';
 //	public String canHave = "enrdigna";
 	// This example should find the word ingrained as the biggest word
-	public ArrayList<String> words = new ArrayList<String>();
 
 	public static void main(String args[]) {
 		Main M = new Main();
@@ -33,7 +32,6 @@ public class Main {
 		for (String S : foundWords) {
 			System.out.println(S);
 		}
-//		TextNode.makeMap(M.mustHave, M.canHave);
 	}
 
 }
