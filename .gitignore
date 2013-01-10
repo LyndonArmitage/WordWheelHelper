@@ -4,5 +4,8 @@
 *.iml
 *.class
 *.jar
+*.properties
+*.xml
 out/
 .idea/
+META-INF/
