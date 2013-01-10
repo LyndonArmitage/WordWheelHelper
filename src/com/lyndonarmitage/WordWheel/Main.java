@@ -16,8 +16,10 @@ import java.util.LinkedHashSet;
  */
 public class Main {
 
-	public char mustHave = 'i';
-	public String canHave = "enrdigna";
+	public char mustHave = 'c';
+	public String canHave = "tliolesa";
+	//	public char mustHave = 'i';
+//	public String canHave = "enrdigna";
 	// This example should find the word ingrained as the biggest word
 	public ArrayList<String> words = new ArrayList<String>();
 
@@ -26,7 +28,8 @@ public class Main {
 		TextNodeCreator T = TextNodeCreator.instanceOf();
 		TextNode root = T.createNewNode(M.mustHave, M.canHave);
 		T.loadWords("wordlist.txt");
-		LinkedHashSet<String> foundWords = T.findWords(root);
+		ArrayList<String> textStringsList = new ArrayList<String>();
+		LinkedHashSet<String> foundWords = T.findWords(root, textStringsList);
 		for (String S : foundWords) {
 			System.out.println(S);
 		}

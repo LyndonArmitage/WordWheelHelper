@@ -55,10 +55,21 @@ public class TextNodeCreator {
 		}
 	}
 
-	public LinkedHashSet<String> findWords(TextNode root) {
+	/**
+	 * This function will find the words that can be made from a tree of potential letter combinations.<br />
+	 *
+	 * @param root            Is the root node to use
+	 * @param textStringsList This is an ArrayList used to keep a record of the text of the nodes visited, that way we can ignore duplicate branches.
+	 * @return
+	 */
+	public LinkedHashSet<String> findWords(TextNode root, ArrayList<String> textStringsList) {
 		LinkedHashSet<String> found = new LinkedHashSet<String>();
 		for (TextNode N : root.children) {
-			found.addAll(findWords(N));
+			if (textStringsList.contains(N.getTextString())) continue;
+			else {
+				textStringsList.add(N.getTextString());
+			}
+			found.addAll(findWords(N, textStringsList));
 			for (String S : words) {
 				if (N.getTextString().length() != S.length()) continue;
 				String orderedWord = TextNode.reorderString(S);
